@@ -75,7 +75,7 @@
 
   /* HERO */
   .hero {
-    padding: 80px 2rem 64px;
+    padding: 80px 2rem 40px;
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
@@ -116,6 +116,7 @@
     padding-top: 40px;
     border-top: 1px solid var(--border);
     flex-wrap: wrap;
+    margin-bottom: 40px;
   }
   .stat-item { text-align: center; }
   .stat-number {
@@ -131,6 +132,38 @@
     color: var(--ink-muted);
     margin-top: 6px;
     font-weight: 400;
+  }
+
+  /* MARKET DASHBOARD WIDGET */
+  .market-section {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+    padding: 0 2rem;
+  }
+  .market-card-wrapper {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  }
+  .market-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .market-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 14px;
+    background: var(--accent);
   }
 
   /* DIVIDER */
@@ -568,7 +601,7 @@
 <div class="hero">
   <p class="hero-eyebrow">投资者教育 · 理性决策</p>
   <h1>市场不怕你聪明<br>只怕你<em>不了解自己</em></h1>
-  <p class="hero-sub">散户投资者最大的对手，不是机构，不是庄家，而是自己大脑里根死蒂固的认知偏误。认识它们，才能战胜它们。</p>
+  <p class="hero-sub">散户投资者最大的对手，不是机构，不是庄家，而是自己大脑里根深蒂固的认知偏误。认识它们，才能战胜它们。</p>
   <div class="hero-stats">
     <div class="stat-item">
       <span class="stat-number">87%</span>
@@ -583,6 +616,69 @@
       <p class="stat-label">掌握理性投资框架</p>
     </div>
   </div>
+</div>
+
+<div class="market-section">
+  <div class="market-card-wrapper">
+    <h3 class="market-title">全球核心大类资产实时大盘 (TradingView)</h3>
+    <div class="tradingview-widget-container" style="height: 450px; width: 100%;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {
+        "colorTheme": "light",
+        "dateRange": "12M",
+        "showChart": true,
+        "locale": "zh_CN",
+        "width": "100%",
+        "height": "100%",
+        "largeChartUrl": "",
+        "isTransparent": true,
+        "showSymbolLogo": true,
+        "showFloatingTooltip": false,
+        "tabs": [
+          {
+            "title": "全球主要指数",
+            "symbols": [
+              { "s": "OANDA:SPX500USD", "d": "标普 500 指数" },
+              { "s": "OANDA:NAS100USD", "d": "纳斯达克 100 指数" },
+              { "s": "SSE:000300", "d": "沪深 300 指数" },
+              { "s": "HSI:HSI", "d": "香港恒生指数" },
+              { "s": "INDEX:NKY", "d": "日经 225 指数" },
+              { "s": "TWSE:TAIEX", "d": "台湾加权指数" }
+            ],
+            "originalTitle": "Indices"
+          },
+          {
+            "title": "商品与数字资产",
+            "symbols": [
+              { "s": "OANDA:XAUUSD", "d": "黄金现货 (美元/盎司)" },
+              { "s": "BINANCE:BTCUSDT", "d": "比特币 (BTC/USDT)" }
+            ]
+          },
+          {
+            "title": "人民币外汇矩阵",
+            "symbols": [
+              { "s": "FX_IDC:USDCNY", "d": "美元 / 人民币" },
+              { "s": "FX_IDC:JPYCNY", "d": "日元 / 人民币" },
+              { "s": "FX_IDC:GBPCNY", "d": "英镑 / 人民币" },
+              { "s": "FX_IDC:TWDCNY", "d": "新台币 / 人民币" },
+              { "s": "FX_IDC:HKDCNY", "d": "港币 / 人民币" }
+            ]
+          },
+          {
+            "title": "核心国债收益率",
+            "symbols": [
+              { "s": "TVC:US10Y", "d": "美国10年期国债收益率" },
+              { "s": "TVC:US02Y", "d": "美国2年期国债收益率" },
+              { "s": "CBOT:ZN1!", "d": "十年期美债期货主连" },
+              { "s": "CCE:CY10Y", "d": "中国10年期国债收益率" }
+            ]
+          }
+        ]
+      }
+      </script>
+    </div>
+    </div>
 </div>
 
 <section id="biases">
@@ -674,7 +770,7 @@
     </div>
     <div class="principle-item">
       <span class="principle-num">7</span>
-      <span class="principle-icon">🌐</span>
+      <span class="principle-icon">👑</span>
       <h3 class="principle-title">分散但不过度分散</h3>
       <p class="principle-body">持有20只股票的收益与持有500只基本相同，但持有3只和持有1只的风险差别很大。找到你能深度理解的5-10个标的，是合理的边界。</p>
     </div>
@@ -730,7 +826,7 @@
         </div>
         <div class="check-item" onclick="this.classList.toggle('checked')">
           <div class="check-box"></div>
-          <span class="check-text">即使这只股跌50%，我也不会影响生活</span>
+          <span class="check-text">即使这只股跌50%，布局也不会影响生活</span>
         </div>
         <div class="check-item" onclick="this.classList.toggle('checked')">
           <div class="check-box"></div>
