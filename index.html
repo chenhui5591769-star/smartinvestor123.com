@@ -237,6 +237,7 @@
   }
   .principle-item:nth-child(even) { border-right: none; }
   .principle-item:nth-last-child(-n+2) { border-bottom: none; }
+  .principle-item:last-child { border-bottom: none; }
   .principle-num {
     font-family: var(--serif);
     font-size: 48px;
@@ -374,6 +375,7 @@
     padding: 36px;
     max-width: 700px;
     margin: 0 auto;
+    position: relative;
   }
   .quiz-question {
     font-family: var(--serif);
@@ -509,36 +511,33 @@
   }
   .retry-btn:hover { background: var(--ink); color: white; }
 
-  /* FOOTER */
-  footer {
-    background: var(--paper-warm);
-    border-top: 1px solid var(--border);
-    padding: 48px 2rem;
-    text-align: center;
+  /* FIREWORKS CANVAS & OVERLAY */
+  #fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    pointer-events: none;
+    display: none;
+    background: rgba(0, 0, 0, 0.3);
   }
-  footer .footer-logo {
+  #textOverlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-family: var(--serif);
-    font-size: 20px;
+    font-size: clamp(36px, 8vw, 72px);
     font-weight: 700;
-    margin-bottom: 12px;
-  }
-  footer .footer-logo span { color: var(--accent); }
-  footer p {
-    font-size: 13px;
-    color: var(--ink-muted);
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-  .disclaimer {
-    margin-top: 24px;
-    padding: 16px 20px;
-    border: 1px solid var(--border);
-    display: inline-block;
-    max-width: 600px;
-    font-size: 12px;
-    color: var(--ink-muted);
-    line-height: 1.65;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(184,134,11,0.5);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    letter-spacing: 0.1em;
   }
 
   @media (max-width: 640px) {
@@ -555,7 +554,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#"><span>smartinvestor123</span>.com</a>
   <ul class="nav-links">
@@ -567,11 +565,10 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <p class="hero-eyebrow">投资者教育 · 理性决策</p>
   <h1>市场不怕你聪明<br>只怕你<em>不了解自己</em></h1>
-  <p class="hero-sub">散户投资者最大的对手，不是机构，不是庄家，而是自己大脑里根深蒂固的认知偏误。认识它们，才能战胜它们。</p>
+  <p class="hero-sub">散户投资者最大的对手，不是机构，不是庄家，而是自己大脑里根死蒂固的认知偏误。认识它们，才能战胜它们。</p>
   <div class="hero-stats">
     <div class="stat-item">
       <span class="stat-number">87%</span>
@@ -588,7 +585,6 @@
   </div>
 </div>
 
-<!-- BIASES -->
 <section id="biases">
   <p class="section-label">认知偏误</p>
   <h2 class="section-title">你的大脑是怎样骗你的</h2>
@@ -634,7 +630,6 @@
   </div>
 </section>
 
-<!-- PRINCIPLES -->
 <section id="principles">
   <p class="section-label">投资原则</p>
   <h2 class="section-title">理性投资的八条准则</h2>
@@ -692,7 +687,6 @@
   </div>
 </section>
 
-<!-- CHECKLIST -->
 <div class="checklist-bg" id="checklist">
   <div class="checklist-inner">
     <p class="section-label">决策清单</p>
@@ -751,7 +745,6 @@
   </div>
 </div>
 
-<!-- GLOSSARY -->
 <section id="glossary">
   <p class="section-label">术语速查</p>
   <h2 class="section-title">投资者必知词汇</h2>
@@ -789,18 +782,17 @@
   </div>
 </section>
 
-<!-- QUIZ -->
 <section id="quiz">
   <p class="section-label">自我测试</p>
   <h2 class="section-title">检验你的投资认知</h2>
-  <p class="section-desc">5道情景题，测试你在真实场景中能否做出理性判断。</p>
+  <p class="section-desc">6道情景题，测试你在真实场景中能否做出理性判断。</p>
 
   <div class="quiz-card">
     <div class="quiz-progress">
       <div class="progress-bar">
-        <div class="progress-fill" id="progressFill" style="width:20%"></div>
+        <div class="progress-fill" id="progressFill" style="width:16.6%"></div>
       </div>
-      <span class="progress-text" id="progressText">第 1 题，共 5 题</span>
+      <span class="progress-text" id="progressText">第 1 题，共 6 题</span>
     </div>
 
     <div id="quizContent">
@@ -813,14 +805,13 @@
 
     <div class="quiz-score" id="quizScore">
       <div class="score-big" id="scoreNum"></div>
-      <p class="score-label">答对题数（满分5题）</p>
+      <p class="score-label">答对题数（满分6题）</p>
       <p class="score-msg" id="scoreMsg"></p>
       <button class="retry-btn" onclick="resetQuiz()">重新测试</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo"><span>smartinvestor123</span>.com</div>
   <p>帮助普通投资者建立理性认知框架，做出更好的财务决策。</p>
@@ -828,6 +819,9 @@
     ⚠️ 免责声明：本网站所有内容仅供教育用途，不构成任何投资建议。投资有风险，入市需谨慎。在做出任何投资决策前，请咨询持牌的专业投资顾问。
   </div>
 </footer>
+
+<canvas id="fireworksCanvas"></canvas>
+<div id="textOverlay">FSY & PXY</div>
 
 <script>
 const questions = [
@@ -895,12 +889,146 @@ const questions = [
     correct: 1,
     good: "✓ 正确。80%的资产押注单一标的，反映了过度自信。「非常看好」并不等于「一定正确」。保留足够的现金是风险管理的基本，也是抓住未来机会的条件。",
     bad: "✗ 80%资产重仓单一标的，是过度自信的典型表现。即使你的判断很有根据，市场仍然充满不确定性。良好的仓位管理要求即使在最看好的标的上，也保留足够的缓冲空间。"
+  },
+  {
+    q: "回望历史长河，2001年中国发生了一件深刻改变全球经济与宏观贸易格局的大事。它是？",
+    ctx: "考察：宏观历史与全球化进程",
+    options: [
+      "成功举办北京申奥",
+      "正式加入世界贸易组织（WTO）",
+      "中国足球队首次踢进世界杯",
+      "上海合作组织正式成立"
+    ],
+    correct: 1,
+    good: "✨ 太棒了！答对了！2001年12月11日，中国正式加入WTO。这是中国融入全球化经济的里程碑事件，开启了波澜壮阔的“世界工厂”时代，也彻底改变了全球资本与宏观产业链的布局。",
+    bad: "✗ 很遗憾，虽然选项里的事件都发生在2001年，但从宏观经济、国际贸易和长期资本周期的深度广度来看，最具历史性影响的事件是正式加入WTO。"
   }
 ];
 
 let current = 0;
 let score = 0;
 let answered = false;
+
+// Fireworks Animation Engine
+const canvas = document.getElementById('fireworksCanvas');
+const ctx = canvas.getContext('2d');
+let animationId = null;
+let fireworks = [];
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+
+class Firework {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height;
+    this.targetY = Math.random() * (canvas.height * 0.5);
+    this.speed = 4 + Math.random() * 4;
+    this.angle = Math.atan2(this.targetY - this.y, this.x - this.x);
+    this.hue = Math.random() * 360;
+  }
+  update() {
+    this.y -= this.speed;
+    if (this.y <= this.targetY) {
+      explode(this.x, this.y, this.hue);
+      return false;
+    }
+    return true;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${this.hue}, 100%, 60%)`;
+    ctx.fill();
+  }
+}
+
+class Particle {
+  constructor(x, y, hue) {
+    this.x = x;
+    this.y = y;
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = Math.random() * 6 + 1;
+    this.friction = 0.95;
+    this.gravity = 0.12;
+    this.alpha = 1;
+    this.decay = Math.random() * 0.015 + 0.01;
+    this.hue = hue + (Math.random() * 40 - 20);
+  }
+  update() {
+    this.speed *= this.friction;
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed + this.gravity;
+    this.alpha -= this.decay;
+    return this.alpha > 0;
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, Math.random() * 2 + 1, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${this.hue}, 100%, 60%)`;
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function explode(x, y, hue) {
+  for (let i = 0; i < 60; i++) {
+    particles.push(new Particle(x, y, hue));
+  }
+}
+
+function animateFireworks() {
+  ctx.fillStyle = 'rgba(26, 26, 26, 0.2)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  if (Math.random() < 0.05 && fireworks.length < 5) {
+    fireworks.push(new Firework());
+  }
+
+  fireworks = fireworks.filter(f => {
+    f.update();
+    f.draw();
+    return f.y > f.targetY;
+  });
+
+  particles = particles.filter(p => {
+    const alive = p.update();
+    if (alive) p.draw();
+    return alive;
+  });
+
+  animationId = requestAnimationFrame(animateFireworks);
+}
+
+function startFireworksEffect() {
+  resizeCanvas();
+  canvas.style.display = 'block';
+  fireworks = [];
+  particles = [];
+  animateFireworks();
+
+  // 烟花持续放 4.5 秒，随后干净地停止并浮现文字
+  setTimeout(() => {
+    cancelAnimationFrame(animationId);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.display = 'none';
+    
+    // 渐显英文字样
+    const overlay = document.getElementById('textOverlay');
+    overlay.style.opacity = '1';
+    
+    // 停留 3 秒后淡出
+    setTimeout(() => {
+      overlay.style.opacity = '0';
+    }, 3000);
+  }, 4500);
+}
 
 function loadQuestion() {
   const q = questions[current];
@@ -939,6 +1067,11 @@ function selectAnswer(idx) {
     score++;
     fb.className = 'quiz-feedback good show';
     fb.textContent = q.good;
+    
+    // 触发特设条件：如果是最后一道历史大事题（即第6题，索引为5）且答对
+    if (current === 5) {
+      startFireworksEffect();
+    }
   } else {
     fb.className = 'quiz-feedback bad show';
     fb.textContent = q.bad;
@@ -966,8 +1099,9 @@ function showScore() {
     '还需要多学习。建议从头阅读本页内容，重点关注认知偏误部分。',
     '有一定基础，但仍有提升空间。重点回顾你答错的题目背后的原理。',
     '掌握得不错！保持独立思考，继续学习，投资决策会越来越理性。',
-    '非常优秀！你已经具备了理性投资的基本认知框架。',
-    '完美！你对投资认知偏误有深入理解，这是长期投资成功的重要基础。'
+    '很优秀！你已经具备了理性投资的基本认知框架。',
+    '非常优秀！对投资偏误与基本宏观历史都有很好的见解。',
+    '完美！你对投资认知偏误和宏观大势有深入理解，这是长期投资成功的重要基础。'
   ];
   document.getElementById('scoreMsg').textContent = msgs[score];
 }
@@ -978,6 +1112,7 @@ function resetQuiz() {
   answered = false;
   document.getElementById('quizContent').style.display = 'block';
   document.getElementById('quizScore').className = 'quiz-score';
+  document.getElementById('textOverlay').style.opacity = '0';
   loadQuestion();
 }
 
