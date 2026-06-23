@@ -6,7 +6,7 @@
 <title>smartinvestor123.com — 理性投资，从认知开始</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght=400;600;700&family=Noto+Sans+SC:wght=300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1a1a1a;
@@ -75,7 +75,7 @@
 
   /* HERO */
   .hero {
-    padding: 80px 2rem 40px;
+    padding: 80px 2rem 64px;
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
@@ -116,7 +116,6 @@
     padding-top: 40px;
     border-top: 1px solid var(--border);
     flex-wrap: wrap;
-    margin-bottom: 40px;
   }
   .stat-item { text-align: center; }
   .stat-number {
@@ -132,38 +131,6 @@
     color: var(--ink-muted);
     margin-top: 6px;
     font-weight: 400;
-  }
-
-  /* MARKET DASHBOARD WIDGET */
-  .market-section {
-    max-width: 1100px;
-    margin: 0 auto 48px;
-    padding: 0 2rem;
-  }
-  .market-card-wrapper {
-    background: var(--paper-warm);
-    border: 1px solid var(--border);
-    padding: 16px;
-    border-radius: 4px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-  }
-  .market-title {
-    font-family: var(--serif);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 12px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .market-title::before {
-    content: '';
-    display: inline-block;
-    width: 3px;
-    height: 14px;
-    background: var(--accent);
   }
 
   /* DIVIDER */
@@ -565,12 +532,28 @@
     font-size: clamp(36px, 8vw, 72px);
     font-weight: 700;
     color: #fff;
-    text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(184,134,11,0.5);
     z-index: 9999;
     pointer-events: none;
     opacity: 0;
     transition: opacity 2s ease-in-out;
     letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+  }
+  /* 专属定制：FSY 与 PXY 的渐进发光色 */
+  .fsy-color {
+    color: #1abc9c; /* 优雅的湖水蓝 */
+    text-shadow: 0 0 20px rgba(26,188,156,0.6), 0 0 40px rgba(26,188,156,0.3);
+  }
+  .pxy-color {
+    color: #e91e63; /* 优雅的品红色 */
+    text-shadow: 0 0 20px rgba(233,30,99,0.6), 0 0 40px rgba(233,30,99,0.3);
+  }
+  .amp-color {
+    color: rgba(255,255,255,0.7);
+    text-shadow: 0 0 15px rgba(255,255,255,0.3);
   }
 
   @media (max-width: 640px) {
@@ -616,69 +599,6 @@
       <p class="stat-label">掌握理性投资框架</p>
     </div>
   </div>
-</div>
-
-<div class="market-section">
-  <div class="market-card-wrapper">
-    <h3 class="market-title">全球核心大类资产实时大盘 (TradingView)</h3>
-    <div class="tradingview-widget-container" style="height: 450px; width: 100%;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {
-        "colorTheme": "light",
-        "dateRange": "12M",
-        "showChart": true,
-        "locale": "zh_CN",
-        "width": "100%",
-        "height": "100%",
-        "largeChartUrl": "",
-        "isTransparent": true,
-        "showSymbolLogo": true,
-        "showFloatingTooltip": false,
-        "tabs": [
-          {
-            "title": "全球主要指数",
-            "symbols": [
-              { "s": "OANDA:SPX500USD", "d": "标普 500 指数" },
-              { "s": "OANDA:NAS100USD", "d": "纳斯达克 100 指数" },
-              { "s": "SSE:000300", "d": "沪深 300 指数" },
-              { "s": "HSI:HSI", "d": "香港恒生指数" },
-              { "s": "INDEX:NKY", "d": "日经 225 指数" },
-              { "s": "TWSE:TAIEX", "d": "台湾加权指数" }
-            ],
-            "originalTitle": "Indices"
-          },
-          {
-            "title": "商品与数字资产",
-            "symbols": [
-              { "s": "OANDA:XAUUSD", "d": "黄金现货 (美元/盎司)" },
-              { "s": "BINANCE:BTCUSDT", "d": "比特币 (BTC/USDT)" }
-            ]
-          },
-          {
-            "title": "人民币外汇矩阵",
-            "symbols": [
-              { "s": "FX_IDC:USDCNY", "d": "美元 / 人民币" },
-              { "s": "FX_IDC:JPYCNY", "d": "日元 / 人民币" },
-              { "s": "FX_IDC:GBPCNY", "d": "英镑 / 人民币" },
-              { "s": "FX_IDC:TWDCNY", "d": "新台币 / 人民币" },
-              { "s": "FX_IDC:HKDCNY", "d": "港币 / 人民币" }
-            ]
-          },
-          {
-            "title": "核心国债收益率",
-            "symbols": [
-              { "s": "TVC:US10Y", "d": "美国10年期国债收益率" },
-              { "s": "TVC:US02Y", "d": "美国2年期国债收益率" },
-              { "s": "CBOT:ZN1!", "d": "十年期美债期货主连" },
-              { "s": "CCE:CY10Y", "d": "中国10年期国债收益率" }
-            ]
-          }
-        ]
-      }
-      </script>
-    </div>
-    </div>
 </div>
 
 <section id="biases">
@@ -770,7 +690,7 @@
     </div>
     <div class="principle-item">
       <span class="principle-num">7</span>
-      <span class="principle-icon">👑</span>
+      <span class="principle-icon">🌐</span>
       <h3 class="principle-title">分散但不过度分散</h3>
       <p class="principle-body">持有20只股票的收益与持有500只基本相同，但持有3只和持有1只的风险差别很大。找到你能深度理解的5-10个标的，是合理的边界。</p>
     </div>
@@ -917,7 +837,11 @@
 </footer>
 
 <canvas id="fireworksCanvas"></canvas>
-<div id="textOverlay">FSY & PXY</div>
+<div id="textOverlay">
+  <span class="fsy-color">FSY</span>
+  <span class="amp-color">&amp;</span>
+  <span class="pxy-color">PXY</span>
+</div>
 
 <script>
 const questions = [
@@ -945,7 +869,7 @@ const questions = [
     ],
     correct: 2,
     good: "✓ 正确。信息来源是群体情绪，不是研究结论。正确做法是独立调研：这家公司做什么？估值合理吗？我有足够的了解支持这个决策吗？",
-    bad: "✗ 群里热议的股票，往往是消息已经充分定价的时候。正确做法是独立调研公司基本面，而不是跟随群体情绪行动。"
+    bad: "✗ 群里热义的股票，往往是消息已经充分定价的时候。正确做法是独立调研公司基本面，而不是跟随群体情绪行动。"
   },
   {
     q: "你买入某公司股票后，看到一篇分析文章指出该公司存在竞争风险。你第一反应是什么？",
@@ -1109,7 +1033,7 @@ function startFireworksEffect() {
   particles = [];
   animateFireworks();
 
-  // 烟花持续放 4.5 秒，随后干净地停止并浮现文字
+  // 烟花持续放 4.5 秒，随后干净地停止并浮现色彩文字
   setTimeout(() => {
     cancelAnimationFrame(animationId);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1119,10 +1043,10 @@ function startFireworksEffect() {
     const overlay = document.getElementById('textOverlay');
     overlay.style.opacity = '1';
     
-    // 停留 3 秒后淡出
+    // 停留 3.5 秒后淡出
     setTimeout(() => {
       overlay.style.opacity = '0';
-    }, 3000);
+    }, 3500);
   }, 4500);
 }
 
@@ -1164,7 +1088,7 @@ function selectAnswer(idx) {
     fb.className = 'quiz-feedback good show';
     fb.textContent = q.good;
     
-    // 触发特设条件：如果是最后一道历史大事题（即第6题，索引为5）且答对
+    // 触发特设条件：如果是最后一道中国大事题（第6题，索引为5）且答对
     if (current === 5) {
       startFireworksEffect();
     }
